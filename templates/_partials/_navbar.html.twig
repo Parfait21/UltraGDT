@@ -12,7 +12,9 @@
                 <ul class="nav-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#">Clients</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="#">Clients</a></li>
+                    {% endif %}                    
                 </ul>
             </div>
 
@@ -38,9 +40,12 @@
                             <i class="fa-solid fa-user-tie fa-lg" style="font-size: 20px;"></i>
                         </p>
                         <div class="dropdown-content">
-                            <a href="#" class="dropdown-item">Déconnexion</a>
-                            <a href="#" class="dropdown-item">Connexion</a>
-                            <a href="#" class="dropdown-item">Inscription</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
+                            <a href="{{ path('app_register') }}" class="dropdown-item">Inscription</a>
+                        {% endif %}   
                         </div>
                     </div>
                 </div>
