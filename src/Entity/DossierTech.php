@@ -24,7 +24,10 @@ class DossierTech
     private ?string $Taille = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateOkPord = null;
+    private ?\DateTimeInterface $dateCreat = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $File = null;
 
     public function getId(): ?int
     {
@@ -67,14 +70,26 @@ class DossierTech
         return $this;
     }
 
-    public function getDateOkPord(): ?\DateTimeInterface
+    public function getDateCreat(): ?\DateTimeInterface
     {
-        return $this->dateOkPord;
+        return $this->dateCreat;
     }
 
-    public function setDateOkPord(\DateTimeInterface $dateOkPord): static
+    public function setDateCreat(\DateTimeInterface $dateCreat): static
     {
-        $this->dateOkPord = $dateOkPord;
+        $this->dateCreat = $dateCreat;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->File;
+    }
+
+    public function setFile(string $File): static
+    {
+        $this->File = $File;
 
         return $this;
     }

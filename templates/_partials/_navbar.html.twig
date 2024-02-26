@@ -1,18 +1,15 @@
 <nav>
     <div class="nav-bar">
         <i class='bx bx-menu sidebarOpen'></i>
-        <span class="logo navLogo"><a href="https://www.ultramaille.com/" target="_blank">Ultramaille SA</a></span>
+        <span class="logo navLogo"><a class="navbar-brand shadow sliding-text" href="https://www.ultramaille.com/" target="_blank" id="logos" style="background:white; padding:13px;">
+          <img src="{{ asset('assets/images/logo1.png') }}" alt="Logo ultramaille"  style="width:50px; height:45px;">
+        </a></span>
 
         <div class="menu">
-            <div class="logo-toggle">
-                <span class="logo"><a href="https://www.ultramaille.com/" target="_blank">Ultramaille SA</a></span>
-                <i class='bx bx-x siderbarClose'></i>
-            </div>
-
             <ul class="nav-links">
                 <li><a href="{{ path('app_home') }}">Home</a></li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a href="{{ path('app_client') }}">Clients</a></li>
+                    <li><a href="{{ path('app_client_list') }}">Clients</a></li>
                 {% endif %}                    
             </ul>
         </div>

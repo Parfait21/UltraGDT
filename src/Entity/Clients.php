@@ -16,9 +16,6 @@ class Clients
     #[ORM\Column(length: 150)]
     private ?string $NomClient = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $Saison = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -36,15 +33,4 @@ class Clients
         return $this;
     }
 
-    public function getSaison(): ?string
-    {
-        return $this->Saison;
-    }
-
-    public function setSaison(string $Saison): static
-    {
-        $this->Saison = $Saison;
-
-        return $this;
-    }
 }
