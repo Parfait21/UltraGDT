@@ -17,7 +17,6 @@ class ClientFormType extends AbstractType
             ->add('NomClient', TextType::class, [
                 'required' => false
             ])
-            ->add('submit', SubmitType::class)
         ;
     }
 

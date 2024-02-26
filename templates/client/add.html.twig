@@ -3,7 +3,26 @@
 {% block title %}Ajouter un client{% endblock %}
 
 {% block body %}
-
-    {{ form(form) }}
-
+    <div class="container">
+        <div>
+            <form method="post">
+                <div class="form-group mb-3">
+                {{ form_start(form) }}
+                    <div id="formdiv">
+                        <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px; margin-top:20px;">
+                        <h1 class="display-6" style="text-align:center;">Ajouter client</h1>
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomClient) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">{{ form_widget(form.NomClient, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Client...'}}) }}</div>
+                        </div>
+                        <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col col-md-4 offset-md-4"><button class="btn btn-light btn-lg" style="margin-left:16px;" type="submit">Ajouter</button></div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
 {% endblock %}
