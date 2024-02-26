@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
@@ -15,6 +17,14 @@ class Clients
 
     #[ORM\Column(length: 150)]
     private ?string $NomClient = null;
+
+    #[ORM\OneToMany(targetEntity: Saisons::class, mappedBy: 'clientId')]
+    private Collection $saisons;
+
+    public function __construct()
+    {
+        $this->saisons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +39,36 @@ class Clients
     public function setNomClient(string $NomClient): static
     {
         $this->NomClient = $NomClient;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Saisons>
+     */
+    public function getSaisons(): Collection
+    {
+        return $this->saisons;
+    }
+
+    public function addSaison(Saisons $saison): static
+    {
+        if (!$this->saisons->contains($saison)) {
+            $this->saisons->add($saison);
+            $saison->setClientId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSaison(Saisons $saison): static
+    {
+        if ($this->saisons->removeElement($saison)) {
+            // set the owning side to null (unless already changed)
+            if ($saison->getClientId() === $this) {
+                $saison->setClientId(null);
+            }
+        }
 
         return $this;
     }

@@ -29,6 +29,9 @@ class DossierTech
     #[ORM\Column(length: 100)]
     private ?string $File = null;
 
+    #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
+    private ?Saisons $saisonId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class DossierTech
     public function setFile(string $File): static
     {
         $this->File = $File;
+
+        return $this;
+    }
+
+    public function getSaisonId(): ?Saisons
+    {
+        return $this->saisonId;
+    }
+
+    public function setSaisonId(?Saisons $saisonId): static
+    {
+        $this->saisonId = $saisonId;
 
         return $this;
     }
