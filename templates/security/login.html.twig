@@ -127,25 +127,25 @@
 
          {% if app.user %}
             <div class="mb-3">
-               You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+               Tu est connecter entant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se deconnecter</a>
             </div>
          {% endif %}
         <div class="txt_field">
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" autocomplete="username" required autofocus> 
         <span></span>
-        <label>Username</label>
+        <label>Nom d'utilisateur</label>
         </div>
 
         <div class="txt_field">
          <input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
          <span></span>
-         <label>Password</label>
+         <label>Mot de passe</label>
         </div>
 
          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <div class="pass">Mot de passe oublier?</div>
-        <input type="submit">
+        <input type="submit" value="Se connecter">
         <div class="signup_link">Pas de compte?<a href="{{ path('app_register') }}">S'inscrir</a></div>
       </form>
     </div>

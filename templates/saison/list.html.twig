@@ -31,6 +31,7 @@
                                     <th><em class="fa fa-cog fa-lg"></em></th>
                                     <th class="hidden-xs">ID</th>
                                     <th>Name</th>
+                                    <th>Clients</th>
                                     <th>Voir</th>
                                 </tr> 
                             </thead>
@@ -42,8 +43,11 @@
                                     </td>
                                     <td class="hidden-xs">{{ saison.id }}</td>
                                     <td>{{ saison.NomSaison }}</td>
+                                    <td>{{ saison.clientId.NomClient }}</td>
                                     <td align="center">
+                                    <a href="#">
                                         <em class="fa fa-eye fa-lg"></em>
+                                    </a>
                                     </td>
                                 </tr>
                             {% endfor %}

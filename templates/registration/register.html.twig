@@ -99,10 +99,10 @@
                 {{ form_errors(registrationForm) }}
 
                 <div class="input-box">
-                    {{ form_row(registrationForm.username, {'attr': {'placeholder': 'Enter your name', 'required': 'required'}}) }}
+                    {{ form_row(registrationForm.username, {'attr': {'placeholder': 'Entrer votre nom', 'required': 'required'}}) }}
                 </div>
                 <div class="input-box">
-                    {{ form_row(registrationForm.plainPassword, {'attr': {'placeholder': 'Create password', 'required': 'required'}}) }}
+                    {{ form_row(registrationForm.plainPassword, {'attr': {'placeholder': 'le mot de passe', 'required': 'required'}}) }}
                 </div>
 
                 <div class="agreeterms">
@@ -115,7 +115,7 @@
                 </div>
                 {{ form_row(registrationForm._token) }} <!-- Champ CSRF -->
                 <div class="input-box button">
-                    <input type="Submit">
+                    <input type="Submit" value="S'inscrire">
                 </div>
                 <div class="text">
                     <h3>Already have an account? <a href="{{ path('app_login') }}">Login now</a></h3>
