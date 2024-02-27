@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un dossier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <form method="post">
+                <div class="form-group mb-3">
+                {{ form_start(form) }}
+                    <div id="formdiv">
+                        <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px; margin-top:20px;">
+                        <h1 class="display-6" style="text-align:center;">Ajouter dossier technique</h1>
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomDossier) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                {{ form_widget(form.NomDossier, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Dossier technique'}}) }}
+                            </div>
+
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Reference) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                {{ form_widget(form.Reference, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Reference...'}}) }}
+                            </div>
+
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Taille) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                {{ form_widget(form.Taille, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Taille...'}}) }}
+                            </div>
+
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.saisonId) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                {{ form_widget(form.saisonId, {'attr': {'class': 'form-select', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Selectionner une saison...'}}) }}
+                            </div>
+
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.File) }}</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                {{ form_widget(form.File, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'selectionner un fichier...'}}) }}
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-10 offset-md-1">
+                                <button style="padding:7px 20px 7px; border:none; background:#5DB03E; color:#fff; font-size:16px;" type="submit">Ajouter</button>
+                                <button style="padding:7px 20px 7px; border:none; background:#C70039;" type="submit">
+                                    <a href="#" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

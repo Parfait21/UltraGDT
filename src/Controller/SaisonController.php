@@ -36,7 +36,7 @@ class SaisonController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Saison ajouter avec succes");
-            return $this->redirectToRoute('app_saison_list');
+            return $this->redirectToRoute('app_client_saison,');
         }
         return $this->render('saison/ajout.html.twig', [
             'form' => $form->createView(),
