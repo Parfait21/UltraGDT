@@ -21,6 +21,17 @@ class SaisonsRepository extends ServiceEntityRepository
         parent::__construct($registry, Saisons::class);
     }
 
+    // public function findSaisonsByClientName(string $clientName): array
+    // {
+    //     return $this->createQueryBuilder('s')
+    //         ->innerJoin('s.clientId', 'c')
+    //         ->andWhere('c.NomClient = :clientName')
+    //         ->setParameter('clientName', $clientName)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+
 //    /**
 //     * @return Saisons[] Returns an array of Saisons objects
 //     */
@@ -36,13 +47,5 @@ class SaisonsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Saisons
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
 }

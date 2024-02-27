@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Saisons;
 use App\Form\SaisonFormType;
+use App\Repository\SaisonsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,9 @@ class SaisonController extends AbstractController
     public function listSaison(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Saisons::class);
-        $saisons = $repository->findAll();
+        $saison = $repository->findAll();
         return $this->render('saison/list.html.twig', [
-            'saison' => $saisons,
+            'saison' => $saison,
         ]);
     }
 
