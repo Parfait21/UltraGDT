@@ -42,7 +42,9 @@ class DossierFormType extends AbstractType
             ->add('saisonId', EntityType::class, [
                 'required' => false,
                 'class' => Saisons::class,
-                'choice_label' => 'NomSaison',
+                'choice_label' => function ($saison) {
+                    return $saison->getSD()->getNomSaisons(); // Utilisez la méthode appropriée pour obtenir le label de SaisonDefini
+                },
             ])
         ;
     }

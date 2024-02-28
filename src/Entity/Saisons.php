@@ -15,11 +15,11 @@ class Saisons
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $NomSaison = null;
-
     #[ORM\ManyToOne(inversedBy: 'saisons')]
     private ?Clients $clientId = null;
+
+    #[ORM\ManyToOne(inversedBy: 'saisons')]
+    private ?SaisonDefini $SD = null;
 
     #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId')]
     private Collection $dossierTeches;
@@ -32,18 +32,6 @@ class Saisons
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNomSaison(): ?string
-    {
-        return $this->NomSaison;
-    }
-
-    public function setNomSaison(string $NomSaison): static
-    {
-        $this->NomSaison = $NomSaison;
-
-        return $this;
     }
 
     public function getClientId(): ?Clients
@@ -84,6 +72,18 @@ class Saisons
                 $dossierTech->setSaisonId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSD(): ?SaisonDefini
+    {
+        return $this->SD;
+    }
+
+    public function setSD(?SaisonDefini $SD): static
+    {
+        $this->SD = $SD;
 
         return $this;
     }

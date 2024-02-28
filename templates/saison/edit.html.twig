@@ -14,25 +14,24 @@
                         <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px; margin-top:20px;">
                         <h1 class="display-6" style="text-align:center;">Modifier saison</h1>
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomSaison) }}</strong></p>
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.SD, 'Saison', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">
-                                {{ form_widget(form.NomSaison, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Saison...'}}) }}
+                                {{ form_widget(form.SD, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Saison...'}}) }}
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px; margin-top:5px;"><strong>{{ form_label(form.clientId) }}</strong></p>
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px; margin-top:5px;"><strong>{{ form_label(form.clientId, 'Client', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">
                                 {{ form_widget(form.clientId, {'attr': {'class': 'form-select', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;'}}) }}
                             </div>
-                            
                         </div>
                         <div class="row align-items-center" style="margin-right:0px;margin-left:0px;padding-top:24px;">
                             <div class="col-md-10 offset-md-1">
                                 <button style="padding:7px 20px 7px; border:none; background:#5DB03E; color:#fff; font-size:16px;" type="submit">Modifier</button>
                                 <button style="padding:7px 20px 7px; border:none; background:#C70039;" type="submit">
-                                    <a href="{{ path('app_saison_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
+                                    <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                                 </button>
                             </div>
                         </div>

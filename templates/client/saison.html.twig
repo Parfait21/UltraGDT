@@ -40,7 +40,8 @@
                                 <tr>
                                     <th><em class="fa fa-cog fa-lg"></em></th>
                                     <th class="hidden-xs">ID</th>
-                                    <th>Saison du client</th>
+                                    <th>Saison</th>
+                                    <th>Client</th>
                                     <th>Voir</th>
                                 </tr> 
                             </thead>
@@ -51,7 +52,8 @@
                                         <a href="{{ path('app_saison_edit', {'id':saison.id}) }}"><em class="fa fa-pencil" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
                                     </td>
                                     <td class="hidden-xs">{{ saison.id }}</td>
-                                    <td>{{ saison.NomSaison }}</td>
+                                    <td>{{ saison.SD.NomSaisons }}</td>
+                                    <td>{{ saison.clientId.NomClient }}</td>
                                     <td align="center">
                                     <a href="#">
                                         <em class="fa fa-eye fa-lg"></em>
