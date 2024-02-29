@@ -30,10 +30,9 @@ class DossierTech
     #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
     private ?Saisons $NomSaison = null;
 
-    /**
-     * @var File|null
-     */
-    private ?File $File = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $File = null;
+
 
     public function __construct()
     {
@@ -110,7 +109,7 @@ class DossierTech
         return $this->File;
     }
 
-    public function setFile(?string $File): self
+    public function setFile(?string $File): static
     {
         $this->File = $File;
 
