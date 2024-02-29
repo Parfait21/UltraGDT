@@ -16,10 +16,8 @@ class SaisonFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('SD', EntityType::class, [
+            ->add('NomSaison', TextType::class, [
                 'required' => false,
-                'class' => SaisonDefini::class,
-                'choice_label' => 'NomSaisons',
             ])
             ->add('clientId', EntityType::class, [
                 'required' => false,

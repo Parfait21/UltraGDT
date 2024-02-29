@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 class DossierController extends AbstractController
 {
@@ -30,7 +33,7 @@ class DossierController extends AbstractController
         $form = $this->createForm(DossierFormType::class, $dossier);
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) { 
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($dossier);
             $entityManager->flush();
 
@@ -41,5 +44,44 @@ class DossierController extends AbstractController
         return $this->render('dossier/add.html.twig',[
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/dossier/modifier/{id}', name:'app_dossier_edit')]
+    public function editDossier(ManagerRegistry $doctrine, int $id, Request $request): Response
+    {
+        $repository = $doctrine->getRepository(DossierTech::class);
+        $dossier = $repository->find($id);
+        if (!$dossier) {
+            $this->createNotFoundException('Fichier non trouvé');
+        }
+        $form = $this->createForm(DossierFormType::class, $dossier);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($dossier);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Fichier a ete modifier avec succes!");
+            return $this->redirectToRoute('app_dossier_list');
+        }
+        return $this->render('dossier/edit.html.twig',[
+            'dossier' => $dossier,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/dossier/supprimer/{id}', name:'app_dossier_del')]
+    public function delDossier(ManagerRegistry $doctrine, int $id): Response
+    {
+        $repository = $doctrine->getRepository(DossierTech::class)->find($id);
+        if (!$repository) {
+            $this->createNotFoundException('Fichier non trouvé');
+        }
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($repository);
+        $entityManager->flush();
+        $this->addFlash('success', "Fichier a ete supprimer avec succes!");
+        return $this->redirectToRoute('app_dossier_list');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DossierTechRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DossierTechRepository::class)]
@@ -26,11 +27,18 @@ class DossierTech
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCreat = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $File = null;
-
     #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
-    private ?Saisons $saisonId = null;
+    private ?Saisons $NomSaison = null;
+
+    /**
+     * @var File|null
+     */
+    private ?File $File = null;
+
+    public function __construct()
+    {
+        $this->dateCreat = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -85,26 +93,26 @@ class DossierTech
         return $this;
     }
 
+    public function getNomSaison(): ?Saisons
+    {
+        return $this->NomSaison;
+    }
+
+    public function setNomSaison(?Saisons $NomSaison): static
+    {
+        $this->NomSaison = $NomSaison;
+
+        return $this;
+    }
+
     public function getFile(): ?string
     {
         return $this->File;
     }
 
-    public function setFile(string $File): static
+    public function setFile(?string $File): self
     {
         $this->File = $File;
-
-        return $this;
-    }
-
-    public function getSaisonId(): ?Saisons
-    {
-        return $this->saisonId;
-    }
-
-    public function setSaisonId(?Saisons $saisonId): static
-    {
-        $this->saisonId = $saisonId;
 
         return $this;
     }

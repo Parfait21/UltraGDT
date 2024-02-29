@@ -27,25 +27,16 @@ class DossierFormType extends AbstractType
                 'required' => false,
              ])
             
-            ->add('File', FileType::class, [
-
-               'required' => false,
-                'data_class' => DossierTech::class,
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => false,
-                'label_attr' => [
-                    'class' => 'form-label',
-                ],
-            ])
-            ->add('saisonId', EntityType::class, [
+            ->add('NomSaison', EntityType::class, [
                 'required' => false,
                 'class' => Saisons::class,
-                'choice_label' => function ($saison) {
-                    return $saison->getSD()->getNomSaisons(); // Utilisez la méthode appropriée pour obtenir le label de SaisonDefini
-                },
-            ])
+                'choice_label' => 'NomSaison'
+            ]) 
+               
+            ->add('File', FileType::class, [
+                'label' => 'Sélectionner un fichier',
+                'required' => true,
+            ])                  
         ;
     }
 

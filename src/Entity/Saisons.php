@@ -18,11 +18,11 @@ class Saisons
     #[ORM\ManyToOne(inversedBy: 'saisons')]
     private ?Clients $clientId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'saisons')]
-    private ?SaisonDefini $SD = null;
-
     #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId')]
     private Collection $dossierTeches;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $NomSaison = null;
 
     public function __construct()
     {
@@ -58,7 +58,7 @@ class Saisons
     {
         if (!$this->dossierTeches->contains($dossierTech)) {
             $this->dossierTeches->add($dossierTech);
-            $dossierTech->setSaisonId($this);
+            $dossierTech->setNomSaison($this);
         }
 
         return $this;
@@ -68,22 +68,22 @@ class Saisons
     {
         if ($this->dossierTeches->removeElement($dossierTech)) {
             // set the owning side to null (unless already changed)
-            if ($dossierTech->getSaisonId() === $this) {
-                $dossierTech->setSaisonId(null);
+            if ($dossierTech->getNomSaison() === $this) {
+                $dossierTech->setNomSaison(null);
             }
         }
 
         return $this;
     }
 
-    public function getSD(): ?SaisonDefini
+    public function getNomSaison(): ?string
     {
-        return $this->SD;
+        return $this->NomSaison;
     }
 
-    public function setSD(?SaisonDefini $SD): static
+    public function setNomSaison(?string $NomSaison): static
     {
-        $this->SD = $SD;
+        $this->NomSaison = $NomSaison;
 
         return $this;
     }
