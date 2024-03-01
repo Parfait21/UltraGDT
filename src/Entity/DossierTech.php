@@ -27,7 +27,7 @@ class DossierTech
     private ?\DateTimeInterface $dateCreat = null;
 
     #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
-    private ?Saisons $NomSaison = null;
+    private ?Saisons $saisonId = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $File = null;
@@ -91,14 +91,14 @@ class DossierTech
         return $this;
     }
 
-    public function getNomSaison(): ?Saisons
+    public function getSaisonId(): ?Saisons
     {
-        return $this->NomSaison;
+        return $this->saisonId;
     }
 
-    public function setNomSaison(?Saisons $NomSaison): static
+    public function setSaisonId(?Saisons $saisonId): static
     {
-        $this->NomSaison = $NomSaison;
+        $this->saisonId = $saisonId;
 
         return $this;
     }

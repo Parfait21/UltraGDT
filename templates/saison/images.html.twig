@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Images de la saison {{ saison.id }}{% endblock %}
+
+{% block body %}
+    <h1>Images de la saison {{ saison.id }}</h1>
+    
+    {% if dossierTeches is not empty %}
+    <section></section>
+    <div class="container" style="margin-bottom:15px;">
+        <div class="row">
+            {% for dossierTech in dossierTeches %}
+                <div class="col">
+                    <div class="box" style="width:250px; height:195px;">
+                        <img src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" alt="Image">
+                        <div class="box-layer"></div>
+                        <div class="box-content">
+                            <h5>{{ dossierTech.NomDossier }}</h5>
+                            <p>Reference: {{ dossierTech.Reference }}</p>
+                            <p>Taille: {{ dossierTech.Taille }}</p>
+                            <a class="read-more" href="#">Details&nbsp;</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <p>Aucune image disponible pour cette saison.</p>
+    {% endif %}
+
+{% endblock %}

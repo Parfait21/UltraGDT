@@ -15,7 +15,7 @@ class Saisons
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'saisons')]
+    #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
     private ?Clients $clientId = null;
 
     #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId')]
@@ -58,7 +58,7 @@ class Saisons
     {
         if (!$this->dossierTeches->contains($dossierTech)) {
             $this->dossierTeches->add($dossierTech);
-            $dossierTech->setNomSaison($this);
+            $dossierTech->setSaisonId($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class Saisons
     {
         if ($this->dossierTeches->removeElement($dossierTech)) {
             // set the owning side to null (unless already changed)
-            if ($dossierTech->getNomSaison() === $this) {
-                $dossierTech->setNomSaison(null);
+            if ($dossierTech->getSaisonId() === $this) {
+                $dossierTech->setSaisonId(null);
             }
         }
 
