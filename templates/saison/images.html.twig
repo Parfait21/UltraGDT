@@ -2,23 +2,41 @@
 
 {% block title %}Images de la saison {{ saison.id }}{% endblock %}
 
-{% block body %}
-    <h1>Images de la saison {{ saison.id }}</h1>
-    
-    {% if dossierTeches is not empty %}
+{% block body %}   
+<div class="col-md-10 offset-md-1">
+    <h1>Fichiers de la saison {{ saison.id }}</h1>
+
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                <i class="fa fa-warning" style="font-size: 20px;"></i>
+                <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
+                    {{ message }}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+            </div>
+        {% endfor %}  
+    {% endfor %}
+    <div style="padding:10px; background:#FFC300; width:250px; text-align:center; margin-bottom:10px; border-radius:10px;">
+        <a href="{{ path('app_dossier_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
+            <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
+            Ajouter un fichier
+        </a>
+    </div>
+     {% if dossierTeches is not empty %}
     <section></section>
-    <div class="container" style="margin-bottom:15px;">
+    <div class="container">
         <div class="row">
             {% for dossierTech in dossierTeches %}
                 <div class="col">
-                    <div class="box" style="width:250px; height:195px;">
+                    <div class="box" style="width:250px; height:195px;margin-top:15px;">
                         <img src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" alt="Image">
                         <div class="box-layer"></div>
                         <div class="box-content">
                             <h5>{{ dossierTech.NomDossier }}</h5>
                             <p>Reference: {{ dossierTech.Reference }}</p>
                             <p>Taille: {{ dossierTech.Taille }}</p>
-                            <a class="read-more" href="#">Details&nbsp;</a>
+                            <a class="read-more" href="#" style="text-decoration:none;">Details&nbsp;</a>
                         </div>
                     </div>
                 </div>
@@ -28,5 +46,6 @@
     {% else %}
         <p>Aucune image disponible pour cette saison.</p>
     {% endif %}
+</div>
 
 {% endblock %}

@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
-use App\Entity\Saisons;
 use App\Form\ClientFormType;
-use App\Repository\SaisonsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

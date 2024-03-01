@@ -35,7 +35,6 @@
                                     <th><em class="fa fa-cog fa-lg"></em></th>
                                     <th class="hidden-xs">ID</th>
                                     <th>Nom client</th>
-                                    <th>Email</th>
                                     <th>Saisons</th>
                                 </tr> 
                             </thead>
@@ -57,7 +56,6 @@
                                         </td>
                                     <td class="hidden-xs">{{ client.id }}</td>
                                     <td>{{ client.NomClient }}</td>
-                                    <td>johndoe@example.com</td>
                                     <td align="center">
                                         <a href="{{ path('app_client_saison', {'id': client.id}) }}">
                                             <em class="fa fa-eye fa-lg"></em>

@@ -27,10 +27,10 @@ class DossierFormType extends AbstractType
                 'required' => false,
              ])
             
-            ->add('NomSaison', EntityType::class, [
+             ->add('saisonId', EntityType::class, [
                 'required' => false,
                 'class' => Saisons::class,
-                'choice_label' => 'NomSaison'
+                'choice_label' => 'NomSaison',
             ]) 
                
             ->add('brochure', FileType::class, [
