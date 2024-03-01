@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\DossierTechRepository;
 use Doctrine\DBAL\Types\Types;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DossierTechRepository::class)]

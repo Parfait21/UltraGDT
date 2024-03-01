@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                 {{ form_start(form) }}
                     <div id="formdiv">
@@ -40,10 +40,10 @@
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.File, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.brochure, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">
-                                {{ form_widget(form.File, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.brochure, {'attr': {'class': 'form-control'}}) }}
                             </div>
 
                         </div>
@@ -54,7 +54,7 @@
                                     <a href="#" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                                 </button>
                             </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
                 {{ form_end(form) }}

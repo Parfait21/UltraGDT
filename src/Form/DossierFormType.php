@@ -6,11 +6,11 @@ use App\Entity\DossierTech;
 use App\Entity\Saisons;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class DossierFormType extends AbstractType
 {
@@ -33,9 +33,21 @@ class DossierFormType extends AbstractType
                 'choice_label' => 'NomSaison'
             ]) 
                
-            ->add('File', FileType::class, [
-                'label' => 'Sélectionner un fichier',
-                'required' => true,
+            ->add('brochure', FileType::class, [
+                'label' => 'Selectionner un fichier',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/gif',
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image document',
+                    ])
+                ],
             ])                  
         ;
     }

@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\DossierTech;
 use App\Form\DossierFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\File;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DossierController extends AbstractController
 {
@@ -25,25 +26,46 @@ class DossierController extends AbstractController
         ]);
     }
 
-    #[Route('/dossier/ajout', name:'app_dossier_ajout')]
-    public function addDossier(ManagerRegistry $doctrine, Request $request): Response
+    #[Route('/dossier/ajout', name: 'app_dossier_ajout')]
+    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
-        $entityManager = $doctrine->getManager();
         $dossier = new DossierTech();
         $form = $this->createForm(DossierFormType::class, $dossier);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form->get('brochure')->getData();
+
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('brochures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $dossier->setFile($newFilename);
+            }
+
+            // Persist the entity
             $entityManager->persist($dossier);
+            // Flush the changes to database
             $entityManager->flush();
 
-            $this->addFlash('success', "Dossier ajouter avec succes");
+            $this->addFlash('success', 'Le fichier a été ajouté avec succès.');
+
             return $this->redirectToRoute('app_dossier_list');
         }
         
         return $this->render('dossier/add.html.twig',[
-            'form' => $form->createView(),
-        ]);
+                 'form' => $form->createView(),
+            ]);
     }
 
     #[Route('/dossier/modifier/{id}', name:'app_dossier_edit')]
@@ -83,5 +105,13 @@ class DossierController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', "Fichier a ete supprimer avec succes!");
         return $this->redirectToRoute('app_dossier_list');
+    }
+
+    #[Route('/dossier/liste', name:'app_list1')]
+    public function liste1(): Response
+    {
+        return $this->render('dossier/liste1.html.twig',[
+            
+        ]);
     }
 }
