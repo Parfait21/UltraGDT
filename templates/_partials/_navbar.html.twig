@@ -9,7 +9,7 @@
         <div class="menu">
             <ul class="nav-links">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a href="{{ path('app_home') }}">Acceuil</a></li>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('app_client_list') }}">Clients</a></li>
                 {% endif %}                    
             </ul>

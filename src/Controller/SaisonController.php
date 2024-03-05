@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SaisonController extends AbstractController
 {
+    // Une methode pour afficher la liste des saisons
     #[Route('/saison', name: 'app_saison_list')]
     public function listSaison(ManagerRegistry $doctrine): Response
     {
@@ -22,6 +23,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
+    // Une mtehode d'ajout d'une saison
     #[Route('/saison/ajout', name:'app_saison_ajout')]
     public function addSaison(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -42,6 +44,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
+    // Modifier une telle saison
     #[Route('/saison/modifier/{id}', name:'app_saison_edit')]
     public function editSaison(ManagerRegistry $doctrine, Request $request, int $id): Response
     {
@@ -63,6 +66,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
+    // Une methode qui affiche la liste de fichier d'un client
     #[Route('/saison/images/{id}', name: 'app_saison_images')]
     public function getSaisonImages(Saisons $saison): Response
     {

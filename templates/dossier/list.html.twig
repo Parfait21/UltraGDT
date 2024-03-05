@@ -3,37 +3,36 @@
 {% block title %}Liste des dossiers techniques{% endblock %}
 
 {% block body %}
-<div class="col-md-10 offset-md-1">
-    {% for label, messages in app.flashes() %}
-        {% for message in messages %}
-            <div class="alert alert-info" role="alert">
-                <i class="fa fa-warning" style="font-size: 20px;"></i>
-                <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
-                    {{ message }}
-                </span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
-            </div>
-        {% endfor %}  
-    {% endfor %}
-    <h1>Liste des dossiers techniques</h1>
-    <section></section>
-    <div class="container" style="margin-bottom:15px;">
-        <div class="row">
-            {% for dossier in dossiers %}
-                <div class="col">
-                    <div class="box" style="width:250px; height:195px;">
-                        <img src="{{ asset('uploads/brochures/' ~ dossier.file) }}" alt="Image">
-                        <div class="box-layer"></div>
-                        <div class="box-content">
-                            <h5>{{ dossier.NomDossier }}</h5>
-                            <p>Reference: {{ dossier.Reference }}</p>
-                            <p>Taille: {{ dossier.Taille }}</p>
-                            <a class="read-more" href="#">Details&nbsp;</a>
+    <div class="col-md-10 offset-md-1">
+        {% for label, messages in app.flashes() %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    <i class="fa fa-warning" style="font-size: 20px;"></i>
+                    <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
+                        {{ message }}
+                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+                </div>
+            {% endfor %}  
+        {% endfor %}
+        <h1>Liste des dossiers techniques</h1>
+        <section></section>
+        <div class="container" style="margin-bottom:15px;">
+            <div class="row">
+                {% for dossier in dossiers %}
+                    <div class="col">
+                        <div class="box" style="width:250px; height:195px;">
+                            <img src="{{ asset('uploads/brochures/' ~ dossier.file) }}" alt="Image">
+                            <div class="box-layer"></div>
+                            <div class="box-content">
+                                <h5>{{ dossier.NomDossier }}</h5>
+                                <p>Reference: {{ dossier.Reference }}</p>
+                                <a class="read-more" href="#">Details&nbsp;</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

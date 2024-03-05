@@ -20,9 +20,6 @@ class DossierTech
     #[ORM\Column(length: 255)]
     private ?string $Reference = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Taille = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCreat = null;
 
@@ -63,18 +60,6 @@ class DossierTech
     public function setReference(string $Reference): static
     {
         $this->Reference = $Reference;
-
-        return $this;
-    }
-
-    public function getTaille(): ?string
-    {
-        return $this->Taille;
-    }
-
-    public function setTaille(string $Taille): static
-    {
-        $this->Taille = $Taille;
 
         return $this;
     }

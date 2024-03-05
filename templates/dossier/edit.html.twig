@@ -26,24 +26,17 @@
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Taille) }}</strong></p>
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.saisonId) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">
-                                {{ form_widget(form.Taille, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Taille...'}}) }}
+                                {{ form_widget(form.saisonId, {'attr': {'class': 'form-select', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Selectionner une saison...'}}) }}
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomSaison) }}</strong></p>
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.brochure, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">
-                                {{ form_widget(form.NomSaison, {'attr': {'class': 'form-select', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Selectionner une saison...'}}) }}
-                            </div>
-
-                            <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.File, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
-                            </div>
-                            <div class="col-md-10 offset-md-1">
-                                {{ form_widget(form.File, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.brochure, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             
                         </div>
