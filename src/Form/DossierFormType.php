@@ -23,9 +23,6 @@ class DossierFormType extends AbstractType
             ->add('Reference', TextType::class, [
                'required' => false,
             ])
-            ->add('Taille', TextType::class, [
-                'required' => false,
-             ])
             
              ->add('saisonId', EntityType::class, [
                 'required' => false,

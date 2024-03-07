@@ -5,7 +5,16 @@
 {% block body %}   
     <div class="col-md-10 offset-md-1">
         <h1>Fichiers de la saison {{ saison.id }}</h1>
+<<<<<<< HEAD
 
+=======
+        <div style="padding:10px; background:#FFC300; width:250px; text-align:center; margin-bottom:10px; border-radius:10px;">
+            <a href="{{ path('app_dossier_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
+                <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
+                Ajouter un fichier
+            </a>
+        </div>
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
                 <div class="alert alert-info" role="alert">
@@ -17,6 +26,7 @@
                 </div>
             {% endfor %}  
         {% endfor %}
+<<<<<<< HEAD
         <div style="padding:10px; background:#FFC300; width:250px; text-align:center; margin-bottom:10px; border-radius:10px;">
             <a href="{{ path('app_dossier_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
                 <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
@@ -26,6 +36,10 @@
         {% if dossierTeches is not empty %}
         <section></section>
         <div class="container">
+=======
+        {% if dossierTeches is not empty %}
+        <div class="container" style="margin-bottom:15px;">
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
             <div class="row">
                 {% for dossierTech in dossierTeches %}
                     <div class="col">
@@ -35,17 +49,48 @@
                             <div class="box-content">
                                 <h5>{{ dossierTech.NomDossier }}</h5>
                                 <p>Reference: {{ dossierTech.Reference }}</p>
+<<<<<<< HEAD
                                 <p>Taille: {{ dossierTech.Taille }}</p>
                                 <a class="read-more" href="#" style="text-decoration:none;">Details&nbsp;</a>
+=======
+                                <a class="read-more" href="#" data-image-src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" style="text-decoration:none;">Details&nbsp;</a>
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+<<<<<<< HEAD
+=======
         </div>
         {% else %}
             <p>Aucune image disponible pour cette saison.</p>
         {% endif %}
     </div>
 
+    <div id="background-image" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <img id="modal-image" src="" alt="Image en grand" style="width: 1000px; height: 650px;">
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
+        </div>
+        {% else %}
+            <p>Aucune image disponible pour cette saison.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.read-more').click(function(event) {
+                event.preventDefault();
+                var imageUrl = $(this).data('image-src');
+                $('#modal-image').attr('src', imageUrl);
+                $('#background-image').show();
+            });
+
+            $('#background-image').click(function() {
+                $(this).hide();
+            });
+        });
+    </script>
 {% endblock %}

@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="example-wrapper">
+<<<<<<< HEAD
                 {% for label, messages in app.flashes() %}
                     {% for message in messages %}
                         <div class="alert alert-info" role="alert">
@@ -16,6 +17,8 @@
                         </div>
                     {% endfor %}  
                 {% endfor %}
+=======
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
                         <div class="container">
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1">
@@ -33,6 +36,20 @@
                                 <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                             </button>
                         </div>
+<<<<<<< HEAD
+=======
+                        {% for label, messages in app.flashes() %}
+                            {% for message in messages %}
+                                <div class="alert alert-info" role="alert">
+                                    <i class="fa fa-warning" style="font-size: 20px;"></i>
+                                    <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
+                                        {{ message }}
+                                    </span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+                                </div>
+                            {% endfor %}  
+                        {% endfor %}
+>>>>>>> 2424368005c19f5292fec697367dfdf85c10b3a0
                         <div class="panel-body">
                         {% if saisons is not empty %}
                             <table class="table table-striped table-bordered table-list" style="margin-bottom:10px;">
