@@ -1,25 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Images de la saison {{ saison.id }}{% endblock %}
+{% block title %}Images PLAN{% endblock %}
 
 {% block body %}   
     <div class="col-md-10 offset-md-1">
-        <h1>Fichiers de la saison {{ saison.id }}</h1>
-        <div style="display:flex; align-items:center;">
-            <div style="padding:10px; background:#FFC300; width:250px; text-align:center; margin-bottom:10px; border-radius:10px;">
-                <a href="{{ path('app_dossier_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
-                    <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
-                    Ajouter un fichier
-                </a>
-            </div>
-            <div style="margin-bottom: 10px; float: right; margin-left:620px;">
-                <select onchange="location = this.value;" style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; background-color: #f2f2f2; color: #333; cursor: pointer;">
-                    <option value="" disabled selected style="display: none;">Sélectionner une option</option>
-                    <option value="{{ path('app_images_pull') }}">PULL</option>
-                    <option value="{{ path('app_images_plan') }}">PLAN</option>
-                </select>
-            </div>
-        </div>
+        <h1>Fichiers PLAN</h1>
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
                 <div class="alert alert-info" role="alert">
@@ -31,18 +16,18 @@
                 </div>
             {% endfor %}  
         {% endfor %}
-        {% if dossierTeches is not empty %}
+        {% if imagesPlan is not empty %}
         <div class="container" style="margin-bottom:15px;">
             <div class="row">
-                {% for dossierTech in dossierTeches %}
+                {% for image in imagesPlan %}
                     <div class="col">
                         <div class="box" style="width:250px; height:195px;margin-top:15px;">
-                            <img src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" alt="Image">
+                            <img src="{{ asset('uploads/brochures/' ~ image.file) }}" alt="Image">
                             <div class="box-layer"></div>
                             <div class="box-content">
-                                <h5>{{ dossierTech.NomDossier }}</h5>
-                                <p>Reference: {{ dossierTech.Reference }}</p>
-                                <a class="read-more" href="#" data-image-src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" style="text-decoration:none;">Details&nbsp;</a>
+                                <h5>{{ image.NomDossier }}</h5>
+                                <p>Reference: {{ image.Reference }}</p>
+                                <a class="read-more" href="#" data-image-src="{{ asset('uploads/brochures/' ~ image.file) }}" style="text-decoration:none;">Details&nbsp;</a>
                             </div>
                         </div>
                     </div>
@@ -50,7 +35,7 @@
             </div>
         </div>
         {% else %}
-            <p>Aucune image disponible pour cette saison.</p>
+            <p>Aucune image PLAN disponible pour cette saison.</p>
         {% endif %}
     </div>
 

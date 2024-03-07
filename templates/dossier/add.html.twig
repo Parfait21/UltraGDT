@@ -26,6 +26,21 @@
                             </div>
 
                             <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.TypeFicher, 'Type de fichier', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                            </div>
+                            <div class="col-md-3 offset-md-1">
+                               <div class="col-md-10 offset-md-1">
+                                    <div class="form-check">
+                                        {{ form_widget(form.TypeFicher.0, {'label_attr': {'class': 'form-check-label'}, 'attr': {'class': 'form-check-input', 'style': 'width: 20px; height: 20px;'}}) }}
+                                        <span style="margin-left: 5px;">{{ form_label(form.TypeFicher.0) }}</span>
+                                    </div>
+                                    <div class="form-check">
+                                        {{ form_widget(form.TypeFicher.1, {'label_attr': {'class': 'form-check-label'}, 'attr': {'class': 'form-check-input', 'style': 'width: 20px; height: 20px;'}}) }}
+                                        <span style="margin-left: 5px;">{{ form_label(form.TypeFicher.1) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 offset-md-1">
                                 <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.saisonId, 'Saisons', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-10 offset-md-1">

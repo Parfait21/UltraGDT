@@ -29,6 +29,9 @@ class DossierTech
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $File = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $TypeFicher = null;
+
 
     public function __construct()
     {
@@ -96,6 +99,18 @@ class DossierTech
     public function setFile(?string $File): static
     {
         $this->File = $File;
+
+        return $this;
+    }
+
+    public function getTypeFicher(): ?string
+    {
+        return $this->TypeFicher;
+    }
+
+    public function setTypeFicher(?string $TypeFicher): static
+    {
+        $this->TypeFicher = $TypeFicher;
 
         return $this;
     }

@@ -119,4 +119,27 @@ class DossierController extends AbstractController
             
         ]);
     }
+
+    #[Route("/images/pull", name: "app_images_pull")]
+    public function imagesPull(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(DossierTech::class);
+        $imagesPull = $repository->findBy(['TypeFicher' => 'PULL']);
+
+        return $this->render('dossier/images_pull.html.twig', [
+            'imagesPull' => $imagesPull,
+        ]);
+    }
+
+    #[Route("/images/plan", name: "app_images_plan")]
+    public function imagesPlan(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(DossierTech::class);
+        $imagesPlan = $repository->findBy(['TypeFicher' => 'PLAN']);
+
+        return $this->render('dossier/images_plan.html.twig', [
+            'imagesPlan' => $imagesPlan,
+        ]);
+    }
+
 }
