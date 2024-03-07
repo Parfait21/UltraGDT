@@ -16,6 +16,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DossierController extends AbstractController
 {
+    // Une methode pour afficher dossier technique
     #[Route('/dossier', name: 'app_dossier_list')]
     public function listDossier(ManagerRegistry $doctrine): Response
     {
@@ -26,6 +27,7 @@ class DossierController extends AbstractController
         ]);
     }
 
+    // Methode d'ajout d'un dossier technique
     #[Route('/dossier/ajout', name: 'app_dossier_ajout')]
     public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +70,7 @@ class DossierController extends AbstractController
             ]);
     }
 
+    // Methode permet de modifier une telle DT
     #[Route('/dossier/modifier/{id}', name:'app_dossier_edit')]
     public function editDossier(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
@@ -93,6 +96,7 @@ class DossierController extends AbstractController
         ]);
     }
 
+    // Une methode de suppression DT
     #[Route('/dossier/supprimer/{id}', name:'app_dossier_del')]
     public function delDossier(ManagerRegistry $doctrine, int $id): Response
     {
@@ -107,6 +111,7 @@ class DossierController extends AbstractController
         return $this->redirectToRoute('app_dossier_list');
     }
 
+    // Details d'une telle Dossier Technique
     #[Route('/dossier/liste', name:'app_list1')]
     public function liste1(): Response
     {

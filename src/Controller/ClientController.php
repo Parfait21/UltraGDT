@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ClientController extends AbstractController
 {
+    // Affichage de liste des clients
     #[Route('/client', name: 'app_client_list')]
     public function listClient(ManagerRegistry $doctrine): Response
     {
@@ -22,6 +23,7 @@ class ClientController extends AbstractController
         ]);
     }
 
+    // Une methode qui permet d'ajouter un client
     #[Route('/client/ajout', name:'app_client_ajout')]
     public function addClient(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -43,6 +45,7 @@ class ClientController extends AbstractController
         ]);
     }
 
+    // Une methode pour modifier un client
     #[Route('/client/modifier/{id}', name:'app_client_edit')]
     public function editClient(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
@@ -69,6 +72,7 @@ class ClientController extends AbstractController
         ]);
     }
 
+    // Une methode qui liste ou affiche la saison d'une telle client $id
     #[Route('/saison/client/{id}', name:'app_client_saison')]
     public function saisonClient(ManagerRegistry $doctrine, int $id): Response
     {
@@ -84,6 +88,7 @@ class ClientController extends AbstractController
         ]);
     }
 
+    // Une methode qui permet de supprimer un client
     #[Route('/client/supprimer/{id}', name:'app_client_supprimer')]
     public function deleteClient(ManagerRegistry $doctrine, int $id): Response
     {
