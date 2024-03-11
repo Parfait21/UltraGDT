@@ -5,6 +5,9 @@
 {% block body %}   
     <div class="col-md-10 offset-md-1">
         <h1>Fichiers PLAN</h1>
+        <button style="padding:7px 20px; border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px;">
+    <a href="{{ path('app_saison_images', {'id': saison.id}) }}" style="text-decoration:none; color:#fff; font-size:16px;"><i class="fas fa-arrow-left"></i> Retour</a>
+</button>
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
                 <div class="alert alert-info" role="alert">
@@ -15,6 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
                 </div>
             {% endfor %}  
+            
         {% endfor %}
         {% if imagesPlan is not empty %}
         <div class="container" style="margin-bottom:15px;">

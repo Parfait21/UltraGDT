@@ -69,16 +69,14 @@ class SaisonController extends AbstractController
     #[Route('/saison/images/{id}', name: 'app_saison_images')]
     public function getSaisonImages(Saisons $saison): Response
     {
-        // Récupérez les DossierTech associés à cette saison
         $dossierTeches = $saison->getDossierTeches();
         
-        // Récupérez le client associé à cette saison
         $client = $saison->getClientId();
     
         return $this->render('saison/images.html.twig', [
             'saison' => $saison,
             'dossierTeches' => $dossierTeches,
-            'client' => $client, // Passer le client au template
+            'client' => $client,
         ]);
     }
     

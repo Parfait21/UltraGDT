@@ -26,7 +26,7 @@ class DossierFormType extends AbstractType
             ])
             ->add('TypeFicher', ChoiceType::class, [
                 'choices' => [
-                    'PULL' => 'PULL',
+                    'PRODUIT' => 'PRODUIT',
                     'PLAN' => 'PLAN',
                 ],
                 'expanded' => true,

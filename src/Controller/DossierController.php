@@ -57,9 +57,7 @@ class DossierController extends AbstractController
                 $dossier->setFile($newFilename);
             }
 
-            // Persist the entity
             $entityManager->persist($dossier);
-            // Flush the changes to database
             $entityManager->flush();
 
             $this->addFlash('success', 'Le fichier a été ajouté avec succès.');
@@ -133,6 +131,7 @@ class DossierController extends AbstractController
 
         return $this->render('dossier/images_pull.html.twig', [
             'imagesPull' => $imagesPull,
+            'saison' => $saison,
         ]);
     }
 
@@ -147,6 +146,8 @@ class DossierController extends AbstractController
 
         return $this->render('dossier/images_plan.html.twig', [
             'imagesPlan' => $imagesPlan,
+            'client' => $client,
+            'saison' => $saison
         ]);
     }
 }
