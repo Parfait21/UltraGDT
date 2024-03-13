@@ -6,8 +6,8 @@
     <div class="col-md-10 offset-md-1">
         <h1>Fichiers PLAN</h1>
         <button style="padding:7px 20px; border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px;">
-    <a href="{{ path('app_saison_images', {'id': saison.id}) }}" style="text-decoration:none; color:#fff; font-size:16px;"><i class="fas fa-arrow-left"></i> Retour</a>
-</button>
+            <a href="{{ path('app_saison_images', {'id': saison.id}) }}" style="text-decoration:none; color:#fff; font-size:16px;"><i class="fas fa-arrow-left"></i> Retour</a>
+        </button>
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
                 <div class="alert alert-info" role="alert">
@@ -45,7 +45,7 @@
 
     <div id="background-image" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999;">
         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <img id="modal-image" src="" alt="Image en grand" style="width: 1000px; height: 650px;">
+            <img id="modal-image" src="" alt="Image en grand" style="width: 1000px; height: 630px;">
         </div>
     </div>
 
