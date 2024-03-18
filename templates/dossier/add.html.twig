@@ -5,28 +5,29 @@
 {% block body %}
     <div class="container">
         <div>
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" id="inscription">
                 <div class="form-group mb-3">
                 {{ form_start(form) }}
                     <div id="formdiv">
                         <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px; margin-top:20px;">
                         <h1 class="display-6" style="text-align:center;">Ajouter dossier technique</h1>
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomDossier, 'Nom du fichier', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                                <p id="demo" style="font-wight:800; color:red;"></p>
+                                <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.NomDossier, 'Nom du fichier', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
-                            <div class="col-md-10 offset-md-1">
+                            <div class="col-md-10 offset-md-1" id="input">
                                 {{ form_widget(form.NomDossier, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Dossier technique'}}) }}
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Reference) }}</strong></p>
+                                <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Reference) }}</strong></p>
                             </div>
-                            <div class="col-md-10 offset-md-1">
+                            <div class="col-md-10 offset-md-1" id="input">
                                 {{ form_widget(form.Reference, {'attr': {'class': 'form-control', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Reference...'}}) }}
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.TypeFicher, 'Type de fichier', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                                <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.TypeFicher, 'Type de fichier', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
                             <div class="col-md-3 offset-md-1">
                                <div class="col-md-10 offset-md-1">
@@ -41,16 +42,16 @@
                                 </div>
                             </div>
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.saisonId, 'Saisons', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                                <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.saisonId, 'Saisons', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
-                            <div class="col-md-10 offset-md-1">
+                            <div class="col-md-10 offset-md-1" id="input">
                                 {{ form_widget(form.saisonId, {'attr': {'class': 'form-select', 'style': 'margin-left:0px;font-family:Roboto, sans-serif;', 'placeholder' : 'Selectionner une saison...'}}) }}
                             </div>
 
                             <div class="col-md-8 offset-md-1">
-                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.brochure, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
+                                <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.brochure, 'Sélectionner un fichier :', {'attr': {'class': 'form-label'}}) }}</strong></p>
                             </div>
-                            <div class="col-md-10 offset-md-1">
+                            <div class="col-md-10 offset-md-1" id="input">
                                 {{ form_widget(form.brochure, {'attr': {'class': 'form-control'}}) }}
                             </div>
 
@@ -69,4 +70,21 @@
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById("inscription").addEventListener('submit', function(e) {
+            e.preventDefault();
+            var erreur;
+            var inputs = document.getElementsByName("input");
+
+            if (!inputs.value) {
+                erreur = ("Veuillez remplir tous les champs");
+            }
+          
+            if (erreur) {
+                e.preventDefault();
+                document.getElementById("demo").innerHTML = erreur;
+                return false;
+            }
+        });
+    </script>
 {% endblock %}

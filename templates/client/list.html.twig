@@ -21,9 +21,9 @@
                 {% endfor %}
                 <h1>Liste des clients</h1>
                 <div class="panel panel-default panel-table">
-                    <div style="padding:10px; background:#FFC300; width:250px; text-align:center; margin-bottom:10px; border-radius:10px;">
+                    <div style="padding:10px; background:#FFC300; width:250px; text-align:center; border-radius:10px;" class="shadow mb-3">
                         <a href="{{ path('app_client_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
-                            <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
+                            <i class="fa-solid fa-file-circle-plus fa-lg" style="margin-right:15px;"></i>
                             Ajouter un client
                         </a>
                     </div>
@@ -41,7 +41,6 @@
                             <thead>
                                 <tr>
                                     <th><em class="fa fa-cog fa-lg"></em></th>
-                                    <th class="hidden-xs">ID</th>
                                     <th>Nom client</th>
                                     <th>Saisons</th>
                                 </tr>
@@ -61,13 +60,12 @@
                                             }
                                         </script>
 
-                                    </td>
-                                    <td class="hidden-xs">{{ client.id }}</td>
-                                    <td>{{ client.NomClient }}</td>
-                                    <td align="center">
-                                        <a href="{{ path('app_client_saison', {'id': client.id}) }}">
-                                            <em class="fa fa-eye fa-lg"></em>
-                                        </a>
+                                        </td>
+                                        <td>{{ client.NomClient }}</td>
+                                        <td align="center">
+                                            <a href="{{ path('app_client_saison', {'id': client.id}) }}">
+                                                <em class="fa fa-eye fa-lg"></em>
+                                            </a>
                                     </td>
                                 </tr>
                                 {% endfor %}

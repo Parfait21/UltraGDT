@@ -73,7 +73,7 @@ class ClientController extends AbstractController
     }
 
     // Une methode qui liste ou affiche la saison d'une telle client $id
-    #[Route('/saison/client/{id}', name:'app_client_saison')]
+    #[Route('/client/saison/{id}', name:'app_client_saison')]
     public function saisonClient(ManagerRegistry $doctrine, int $id): Response
     {
         $repository = $doctrine->getRepository(Clients::class);

@@ -1,89 +1,87 @@
 {% extends 'base.html.twig' %}
 
-    {% block title %}Liste des saisons{% endblock %}
+{% block title %}Liste des saisons{% endblock %}
 
-    {% block body %}
-        <div class="example-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <h2>Saisons de {{ client.NomClient }}</h2>
-                            <div class="panel panel-default panel-table">
-                                <div style="margin-bottom:10px;">
-                                    <div style="padding:10px; background:#FFC300; width:250px; text-align:center; border-radius:10px; display: inline-block;">
-                                        <a href="{{ path('app_saison_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
-                                            <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
-                                            Ajouter une saison
-                                        </a>
-                                    </div>
-
-                                <button style="padding:7px 20px; border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px;">
-                                    <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
-                                </button>
-
-                                <button id="ouvrirSaisons" style="color:#fff;padding:7px 20px; border:none; background:maroon; display: inline-block; border-radius:10px; padding:10px 15px 10px;">Ouvrir</button>
+{% block body %}
+    <div class="example-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h2>Saisons de {{ client.NomClient }}</h2>
+                    <div class="panel panel-default panel-table">
+                        <div style="margin-bottom:10px;"> 
+                            <div style="padding:10px; background:#FFC300; width:250px; text-align:center; border-radius:10px; display: inline-block;" class="shadow">
+                                <a href="{{ path('app_saison_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
+                                    <em class="fa fa-plus fa-lg" style="margin-right:15px;"></em>
+                                    Ajouter une saison
+                                </a>
                             </div>
-                            {% for label, messages in app.flashes() %}
-                                {% for message in messages %}
-                                    <div class="alert alert-info" role="alert">
-                                        <i class="fa fa-warning" style="font-size: 20px;"></i>
-                                        <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
-                                            {{ message }}
-                                        </span>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
-                                    </div>
-                                {% endfor %}  
-                            {% endfor %}
-                            
-                            <div class="row justify-content-end mb-2">
-                                <div class="col">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="search-input" placeholder="Recherche...">
-                                    </div>
+                            <button style="border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
+                                <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
+                            </button>
+                            <button id="ouvrirSaisons" style="color:#fff; border:none; background:#18306D; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
+                                Ouvrir
+                            </button>
+                        </div>
+                        {% for label, messages in app.flashes() %}
+                            {% for message in messages %}
+                                <div class="alert alert-info" role="alert">
+                                    <i class="fa fa-warning" style="font-size: 20px;"></i>
+                                    <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
+                                        {{ message }}
+                                    </span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+                                </div>
+                            {% endfor %}  
+                        {% endfor %}
+                        
+                        <div class="row justify-content-end mb-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="search-input" placeholder="Recherche...">
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="panel-body">
-                            {% if saisons is not empty %}
-                                <table class="table table-striped table-bordered table-list" style="margin-bottom:10px;">
-                                    <thead>
-                                        <tr>
-                                            <th><em class="fa fa-cog fa-lg"></em></th>
-                                            <th class="hidden-xs">ID</th>
-                                            <th>Saison</th>
-                                            <th>Client</th>
-                                            <th>Voir</th>
-                                            <th>Ouvrir</th>
-                                        </tr> 
-                                    </thead>
-                                    <tbody>
-                                    {% for saison in saisons %}
-                                        <tr>
-                                            <td align="center">
-                                                <a href="{{ path('app_saison_edit', {'id':saison.id}) }}"><em class="fa fa-pencil" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
-                                            </td>
-                                            <td class="hidden-xs">{{ saison.id }}</td>
-                                            <td>{{ saison.NomSaison }}</td>
-                                            <td>{{ saison.clientId.NomClient }}</td>
-                                            <td align="center">
-                                                <a href="{{ path('app_saison_images', {'id': saison.id}) }}">
-                                                    <em class="fa fa-eye fa-lg"></em>
-                                                </a>
-                                            </td>
-                                            <td align="center">
-                                                <input type="checkbox" class="saison-checkbox" data-saison-id="{{ saison.id }}">
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% else %}
-                                <p>Aucune saison trouvée pour ce client.</p>
-                            {% endif %}
-                            </div>
+                        <div class="panel-body">
+                        {% if saisons is not empty %}
+                            <table class="table table-striped table-bordered table-list" style="margin-bottom:10px;">
+                                <thead>
+                                    <tr>
+                                        <th><em class="fa fa-cog fa-lg"></em></th>
+                                        <th>Saison</th>
+                                        <th>Client</th>
+                                        <th>Voir</th>
+                                        <th>Ouvrir</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                {% for saison in saisons %}
+                                    <tr>
+                                        <td align="center">
+                                            <a href="{{ path('app_saison_edit', {'id':saison.id}) }}"><em class="fa fa-pencil" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
+                                        </td>
+                                        <td>{{ saison.NomSaison }}</td>
+                                        <td>{{ saison.clientId.NomClient }}</td>
+                                        <td align="center">
+                                            <a href="{{ path('app_saison_images', {'id': saison.id}) }}">
+                                                <em class="fa fa-eye fa-lg"></em>
+                                            </a>
+                                        </td>
+                                        <td align="center">
+                                            <input type="checkbox" class="saison-checkbox" data-saison-id="{{ saison.id }}">
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Aucune saison trouvée pour ce client.</p>
+                        {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 {% endblock %}

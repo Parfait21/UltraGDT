@@ -127,7 +127,7 @@
 
          {% if app.user %}
             <div class="mb-3">
-               Tu est connecter entant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se deconnecter</a>
+               Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnecter</a>
             </div>
          {% endif %}
         <div class="txt_field">
