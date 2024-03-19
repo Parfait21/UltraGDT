@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Saisons;
 use App\Form\SaisonFormType;
+use App\Repository\SaisonsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,14 +68,28 @@ class SaisonController extends AbstractController
     }
 
     #[Route('/saison/images/{id}', name: 'app_saison_images')]
-    public function getSaisonImages(Saisons $saison): Response
+    public function getSaisonImages(Saisons $saison, Request $request, SaisonsRepository $saisonsRepository): Response
     {
-        $dossierTeches = $saison->getDossierTeches();
-        
+        // Récupérer l'ID du client
         $client = $saison->getClientId();
-    
+
+        $dossierTeches = $saison->getDossierTeches();
+
+        // Récupérer les IDs des saisons sélectionnées depuis la requête
+        $selectedSaisons = $request->query->get('saisons');
+        $selectedSaisons = explode(',', $selectedSaisons);
+
+        // Récupérer les informations de toutes les saisons sélectionnées
+        $saisons = [];
+        foreach ($selectedSaisons as $saisonId) {
+            $saison = $saisonsRepository->find($saisonId);
+            if ($saison) {
+                $saisons[] = $saison;
+            }
+        }
+
         return $this->render('saison/images.html.twig', [
-            'saison' => $saison,
+            'saisons' => $saisons,
             'dossierTeches' => $dossierTeches,
             'client' => $client,
         ]);
