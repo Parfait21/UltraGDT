@@ -17,10 +17,10 @@
         </button>
 
         <div style="margin-bottom: 10px; margin-top:8px;">
-            <select onchange="location = this.value;" style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; background-color: #f2f2f2; color: #333; cursor: pointer;">
+            <select id="filter-select" style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; background-color: #f2f2f2; color: #333; cursor: pointer;">
                 <option value="" disabled selected style="display: none;">Option d'affichage</option>
-                <option value="#">PRODUIT</option>
-                <option value="#">PLAN</option>
+                <option value="produit">PRODUIT</option>
+                <option value="plan">PLAN</option>
             </select>
         </div>
     </div>
@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     {% for dossierTech in saison.dossierTeches %}
-                        <div class="col">
+                        <div class="col dossier-tech {{ dossierTech.TypeFicher|lower }}">
                             <div class="box" style="width:250px; height:195px;margin-top:15px;">
                                 <img src="{{ asset('uploads/brochures/' ~ dossierTech.file) }}" alt="Image">
                                 <div class="box-layer"></div>
@@ -61,25 +61,31 @@
         {% endif %}
     {% endfor %}
 </div>
-    <div id="background-image" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                <img id="modal-image" src="" alt="Image en grand" style="width: 1000px; height: 630px;">
-            </div>
-        </div>
+<div id="background-image" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <img id="modal-image" src="" alt="Image en grand" style="width: 1000px; height: 630px;">
+    </div>
+</div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('.read-more').click(function(event) {
-                    event.preventDefault();
-                    var imageUrl = $(this).data('image-src');
-                    $('#modal-image').attr('src', imageUrl);
-                    $('#background-image').show();
-                });
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.read-more').click(function(event) {
+            event.preventDefault();
+            var imageUrl = $(this).data('image-src');
+            $('#modal-image').attr('src', imageUrl);
+            $('#background-image').show();
+        });
 
-                $('#background-image').click(function() {
-                    $(this).hide();
-                });
-            });
-        </script>
+        $('#background-image').click(function() {
+            $(this).hide();
+        });
+
+        $('#filter-select').change(function() {
+            var selectedType = $(this).val();
+            $('.dossier-tech').hide(); // Masquer tous les dossiers techniques
+            $('.' + selectedType).show(); // Afficher les dossiers techniques du type sélectionné
+        });
+    });
+</script>
 {% endblock %}
