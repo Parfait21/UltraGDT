@@ -125,7 +125,7 @@ class DossierController extends AbstractController
     {
         $repository = $doctrine->getRepository(DossierTech::class);
         $imagesPull = $repository->findBy([
-            'TypeFicher' => 'PULL',
+            'TypeFicher' => 'PRODUIT',
             'saisonId' => $saison
         ]);
 

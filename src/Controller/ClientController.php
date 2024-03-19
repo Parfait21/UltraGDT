@@ -72,22 +72,6 @@ class ClientController extends AbstractController
         ]);
     }
 
-    // Une methode qui liste ou affiche la saison d'une telle client $id
-    #[Route('/client/saison/{id}', name:'app_client_saison')]
-    public function saisonClient(ManagerRegistry $doctrine, int $id): Response
-    {
-        $repository = $doctrine->getRepository(Clients::class);
-        $clients = $repository->find($id);
-        if (!$clients) {
-            $this->createNotFoundException('Client non trouvé');
-        }
-        $saisons = $clients->getSaisons();
-        return $this->render('client/saison.html.twig',[
-           'client' => $clients,
-           'saisons' => $saisons,
-        ]);
-    }
-
     // Une methode qui permet de supprimer un client
     #[Route('/client/supprimer/{id}', name:'app_client_supprimer')]
     public function deleteClient(ManagerRegistry $doctrine, int $id): Response
@@ -104,4 +88,21 @@ class ClientController extends AbstractController
         $this->addFlash('success', "Client a ete supprimer avec succes!");
         return $this->redirectToRoute('app_client_list');
     }
+
+     // Une methode qui liste ou affiche la saison d'une telle client $id
+     #[Route('/client/saison/{id}', name:'app_client_saison')]
+     public function saisonClient(ManagerRegistry $doctrine, int $id): Response
+     {
+         $repository = $doctrine->getRepository(Clients::class);
+         $clients = $repository->find($id);
+         if (!$clients) {
+             $this->createNotFoundException('Client non trouvé');
+         }
+         $saisons = $clients->getSaisons();
+         return $this->render('client/saison.html.twig',[
+            'client' => $clients,
+            'saisons' => $saisons,
+         ]);
+     }
+
 }

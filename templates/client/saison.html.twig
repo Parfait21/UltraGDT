@@ -19,7 +19,7 @@
                             <button style="border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
                                 <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                             </button>
-                            <button id="ouvrirSaisons" style="color:#fff; border:none; background:#18306D; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
+                            <button id="ouvrirSaisons" data-client-id="{{ client.id }}" style="color:#fff; border:none; background:#18306D; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
                                 Ouvrir
                             </button>
                         </div>
@@ -51,8 +51,7 @@
                                         <th><em class="fa fa-cog fa-lg"></em></th>
                                         <th>Saison</th>
                                         <th>Client</th>
-                                        <th>Voir</th>
-                                        <th>Ouvrir</th>
+                                        <th>Sélectionner</th>
                                     </tr> 
                                 </thead>
                                 <tbody>
@@ -63,11 +62,6 @@
                                         </td>
                                         <td>{{ saison.NomSaison }}</td>
                                         <td>{{ saison.clientId.NomClient }}</td>
-                                        <td align="center">
-                                            <a href="{{ path('app_saison_images', {'id': saison.id}) }}">
-                                                <em class="fa fa-eye fa-lg"></em>
-                                            </a>
-                                        </td>
                                         <td align="center">
                                             <input type="checkbox" class="saison-checkbox" data-saison-id="{{ saison.id }}">
                                         </td>
@@ -84,4 +78,26 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#ouvrirSaisons').click(function() {
+                var selectedSaisons = [];
+                $('.saison-checkbox:checked').each(function() {
+                    selectedSaisons.push($(this).data('saison-id'));
+                });
+
+                // Récupérer l'ID du client
+                var clientId = $(this).data('client-id');
+
+                // Rediriger vers la page pour afficher les DossierTech associés aux saisons sélectionnées
+                if (selectedSaisons.length > 0) {
+                    // Rediriger vers la page des images de la saison avec l'ID de la première saison sélectionnée et l'ID du client
+                    window.location.href = '{{ path('app_saison_images', {'id': 'saisonIdPlaceholder'}) }}'.replace('saisonIdPlaceholder', selectedSaisons[0]) + '?clientId=' + clientId + '&saisons=' + selectedSaisons.join(',');
+                } else {
+                    alert('Veuillez sélectionner au moins une saison.');
+                }
+            });
+        });
+    </script>
 {% endblock %}
