@@ -19,8 +19,8 @@
                             <button style="border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
                                 <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                             </button>
-                            <button id="ouvrirSaisons" data-client-id="{{ client.id }}" style="color:#fff; border:none; background:#18306D; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
-                                Ouvrir
+                            <button id="ouvrirSaisons" data-client-id="{{ client.id }}" style="color:#fff; border:none; background:#24EB2A; display: none; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
+                                <i class="fas fa-check-circle fa-lg"></i> Ouvrir
                             </button>
                         </div>
                         {% for label, messages in app.flashes() %}
@@ -39,7 +39,7 @@
                             <div class="col">
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="search-input" placeholder="Recherche...">
-                                    <span class="input-group-text"><i class="fas fa-search"></i>
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -82,18 +82,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('.saison-checkbox').change(function() {
+                var selectedSaisons = $('.saison-checkbox:checked').length;
+
+                if (selectedSaisons > 0) {
+                    $('#ouvrirSaisons').show();
+                } else {
+                    $('#ouvrirSaisons').hide();
+                }
+            });
+
             $('#ouvrirSaisons').click(function() {
                 var selectedSaisons = [];
                 $('.saison-checkbox:checked').each(function() {
                     selectedSaisons.push($(this).data('saison-id'));
                 });
 
-                // Récupérer l'ID du client
                 var clientId = $(this).data('client-id');
 
-                // Rediriger vers la page pour afficher les DossierTech associés aux saisons sélectionnées
                 if (selectedSaisons.length > 0) {
-                    // Rediriger vers la page des images de la saison avec l'ID de la première saison sélectionnée et l'ID du client
                     window.location.href = '{{ path('app_saison_images', {'id': 'saisonIdPlaceholder'}) }}'.replace('saisonIdPlaceholder', selectedSaisons[0]) + '?clientId=' + clientId + '&saisons=' + selectedSaisons.join(',');
                 } else {
                     alert('Veuillez sélectionner au moins une saison.');

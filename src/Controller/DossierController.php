@@ -52,7 +52,6 @@ class DossierController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
                 }
                 $dossier->setFile($newFilename);
             }
@@ -62,7 +61,8 @@ class DossierController extends AbstractController
 
             $this->addFlash('success', 'Le fichier a été ajouté avec succès.');
 
-            return $this->redirectToRoute('app_saison_images', ['id' => $dossier->getSaisonId()->getId()]);
+            // return $this->redirectToRoute('app_saison_images', ['id' => $dossier->getSaisonId()->getId()]);
+            return $this->redirectToRoute('app_client_saison', ['id' => $dossier->getSaisonId()->getClientId()->getId()]);
         }
         
         return $this->render('dossier/add.html.twig',[
