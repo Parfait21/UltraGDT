@@ -32,6 +32,7 @@
                         <div class="col">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="search-input" placeholder="Recherche...">
+                                <span class="input-group-text"><i class="fas fa-search"></i>
                             </div>
                         </div>
                     </div>
@@ -53,19 +54,12 @@
                                         <a href="{{ path('app_client_supprimer', {'id': client.id}) }}" onclick="return confirmDelete();">
                                             <em class="fa fa-trash" style="color:red;"></em>
                                         </a>
-
-                                        <script>
-                                            function confirmDelete() {
-                                                return confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
-                                            }
-                                        </script>
-
-                                        </td>
-                                        <td>{{ client.NomClient }}</td>
-                                        <td align="center">
-                                            <a href="{{ path('app_client_saison', {'id': client.id}) }}">
-                                                <em class="fa fa-eye fa-lg"></em>
-                                            </a>
+                                    </td>
+                                    <td>{{ client.NomClient }}</td>
+                                    <td align="center">
+                                        <a href="{{ path('app_client_saison', {'id': client.id}) }}">
+                                            <em class="fa fa-eye fa-lg"></em>
+                                        </a>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -77,4 +71,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
+    }
+
+    // Script de filtrage de recherche
+    $(document).ready(function() {
+        const searchInput = $('#search-input');
+        const tableBody = $('.table-list tbody');
+
+        searchInput.on('input', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            const rows = tableBody.find('tr');
+
+            rows.each(function() {
+                const cells = $(this).find('td');
+                let found = false;
+
+                cells.each(function() {
+                    const text = $(this).text().toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock %}
