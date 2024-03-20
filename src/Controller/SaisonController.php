@@ -23,7 +23,7 @@ class SaisonController extends AbstractController
             'saison' => $saison,
         ]);
     }
-
+    
     // Une mtehode d'ajout d'une saison
     #[Route('/saison/ajout', name:'app_saison_ajout')]
     public function addSaison(ManagerRegistry $doctrine, Request $request): Response

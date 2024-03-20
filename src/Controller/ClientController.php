@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Clients;
 use App\Form\ClientFormType;
+use App\Repository\ClientsRepository;
+use App\Repository\SaisonsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,14 +14,24 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ClientController extends AbstractController
 {
-    // Affichage de liste des clients
-    #[Route('/client', name: 'app_client_list')]
-    public function listClient(ManagerRegistry $doctrine): Response
+    #[Route('/client/alls/{page?1}/{nbre?10}', name:'app_client_alls')]
+    public function allsFichier($page, $nbre, ClientsRepository $clientsRepository): Response
     {
-        $repository = $doctrine->getRepository(Clients::class);
-        $clients = $repository->findAll();
-        return $this->render('client/list.html.twig',[
+        // Utilisez la méthode count du Repository
+        $nbClient = $clientsRepository->count([]);
+
+        // Calculez le nombre total de pages
+        $totalPages = ceil($nbClient / $nbre);
+        
+        // Récupérez les fichiers paginés
+        $clients = $clientsRepository->findBy([], [], $nbre, ($page - 1) * $nbre);
+
+        return $this->render('client/list.html.twig', [
+            'isPaginated' => true,
             'client' => $clients,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'nbre' => $nbre
         ]);
     }
 
@@ -37,7 +49,7 @@ class ClientController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Client a ete ajouter avec succes !");
-            return $this->redirectToRoute('app_client_list');
+            return $this->redirectToRoute('app_client_alls');
         }
        
         return $this->render('client/add.html.twig',[
@@ -63,7 +75,7 @@ class ClientController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Client a ete modifier avec succes!");
-            return $this->redirectToRoute('app_client_list');
+            return $this->redirectToRoute('app_client_alls');
         }
         
         return $this->render('client/edit.html.twig',[
@@ -86,23 +98,33 @@ class ClientController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', "Client a ete supprimer avec succes!");
-        return $this->redirectToRoute('app_client_list');
+        return $this->redirectToRoute('app_client_alls');
     }
 
      // Une methode qui liste ou affiche la saison d'une telle client $id
-     #[Route('/client/saison/{id}', name:'app_client_saison')]
-     public function saisonClient(ManagerRegistry $doctrine, int $id): Response
-     {
-         $repository = $doctrine->getRepository(Clients::class);
-         $clients = $repository->find($id);
-         if (!$clients) {
-             $this->createNotFoundException('Client non trouvé');
-         }
-         $saisons = $clients->getSaisons();
-         return $this->render('client/saison.html.twig',[
-            'client' => $clients,
-            'saisons' => $saisons,
-         ]);
-     }
+     #[Route('/client/saison/{id}/{page?1}/{nbre?10}', name:'app_client_saison')]
+    public function saisonClient(ManagerRegistry $doctrine, int $id, $page, $nbre, SaisonsRepository $saisonsRepository): Response
+    {
+        $repository = $doctrine->getRepository(Clients::class);
+        $client = $repository->find($id);
+        if (!$client) {
+            throw $this->createNotFoundException('Client non trouvé');
+        }
+
+        // Récupérez les saisons paginées pour le client
+        $saisonsPaginated = $saisonsRepository->findPaginatedByClientId($id, $page, $nbre);
+
+        // Calculez le nombre total de pages
+        $totalPages = ceil($saisonsPaginated->count() / $nbre);
+
+        return $this->render('client/saison.html.twig', [
+            'client' => $client,
+            'saisons' => $saisonsPaginated,
+            'isPaginated' => true,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'nbre' => $nbre,
+        ]);
+    }
 
 }

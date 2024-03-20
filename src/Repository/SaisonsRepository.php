@@ -5,15 +5,9 @@ namespace App\Repository;
 use App\Entity\Saisons;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * @extends ServiceEntityRepository<Saisons>
- *
- * @method Saisons|null find($id, $lockMode = null, $lockVersion = null)
- * @method Saisons|null findOneBy(array $criteria, array $orderBy = null)
- * @method Saisons[]    findAll()
- * @method Saisons[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class SaisonsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,31 +15,34 @@ class SaisonsRepository extends ServiceEntityRepository
         parent::__construct($registry, Saisons::class);
     }
 
-    // public function findSaisonsByClientName(string $clientName): array
-    // {
-    //     return $this->createQueryBuilder('s')
-    //         ->innerJoin('s.clientId', 'c')
-    //         ->andWhere('c.NomClient = :clientName')
-    //         ->setParameter('clientName', $clientName)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    /**
+     * Récupère les saisons paginées pour un client spécifique.
+     *
+     * @param int $clientId L'ID du client
+     * @param int $page     Le numéro de la page
+     * @param int $nbre     Le nombre d'éléments par page
+     *
+     * @return Paginator
+     */
+    public function findPaginatedByClientId(int $clientId, int $page, int $nbre): Paginator
+    {
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->join('s.clientId', 'c')
+            ->where('c.id = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->orderBy('s.id', 'ASC');
 
+        $query = $queryBuilder->getQuery();
 
-//    /**
-//     * @return Saisons[] Returns an array of Saisons objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+        // Créez un objet Paginator pour paginer les résultats
+        $paginator = new Paginator($query);
 
+        // Configurez la pagination
+        $paginator->getQuery()
+            ->setFirstResult(($page - 1) * $nbre)
+            ->setMaxResults($nbre);
 
+        return $paginator;
+    }
 }
+

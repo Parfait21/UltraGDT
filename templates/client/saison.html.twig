@@ -17,7 +17,7 @@
                                 </a>
                             </div>
                             <button style="border:none; background:#C70039; display: inline-block; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
-                                <a href="{{ path('app_client_list') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
+                                <a href="{{ path('app_client_alls') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                             </button>
                             <button id="ouvrirSaisons" data-client-id="{{ client.id }}" style="color:#fff; border:none; background:#24EB2A; display: none; border-radius:10px; padding:10px 15px 10px; margin-left:8px;">
                                 <i class="fas fa-check-circle fa-lg"></i> Ouvrir
@@ -73,6 +73,34 @@
                         {% else %}
                             <p>Aucune saison trouvée pour ce client.</p>
                         {% endif %}
+                        {% if isPaginated %}
+    <div aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page != 1 %}
+                <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page - 1, 'nbre': nbre}) }}">Previous</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            {% endif %}
+
+            {% set pagesToShow = 2 %}
+            {% set startPage = max(1, page - 1) %}
+            {% set endPage = min(totalPages, startPage + pagesToShow - 1) %}
+
+            {% for i in range(startPage, endPage + 1) %}
+                <li class="page-item {% if i == page %}active{% endif %}">
+                    <a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': i, 'nbre': nbre}) }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page != totalPages %}
+                <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page + 1, 'nbre': nbre}) }}">Next</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">Next</span></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+
                         </div>
                     </div>
                 </div>
