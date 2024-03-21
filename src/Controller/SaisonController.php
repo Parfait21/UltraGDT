@@ -55,6 +55,12 @@ class SaisonController extends AbstractController
     #[Route('/saison/modifier/{id}', name:'app_saison_edit')]
     public function editSaison(ManagerRegistry $doctrine, Request $request, int $id): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $entityManager = $doctrine->getManager();
+            $saison = $entityManager->getRepository(Saisons::class)->find($id);
+            $this->addFlash('error', 'Vous n\'avez pas la permission de modifier cette saison.');
+            return $this->redirectToRoute('app_client_saison', ['id' => $saison->getClientId()->getId()]);
+        }
         $entityManager = $doctrine->getManager();
         $saison = $entityManager->getRepository(Saisons::class)->find($id);
         $form = $this->createForm(SaisonFormType::class, $saison);

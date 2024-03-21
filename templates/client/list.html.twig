@@ -8,26 +8,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                {% for label, messages in app.flashes() %}
-                {% for message in messages %}
-                <div class="alert alert-info" role="alert">
-                    <i class="fa fa-warning" style="font-size: 20px;"></i>
-                    <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
-                        {{ message }}
-                    </span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
-                </div>
-                {% endfor %}
-                {% endfor %}
                 <h1>Liste des clients</h1>
                 <div class="panel panel-default panel-table">
-                    <div style="padding:10px; background:#FFC300; width:250px; text-align:center; border-radius:10px;" class="shadow mb-3">
-                        <a href="{{ path('app_client_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
-                            <i class="fa-solid fa-file-circle-plus fa-lg" style="margin-right:15px;"></i>
-                            Ajouter un client
-                        </a>
-                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div style="padding:10px; background:#FFC300; width:250px; text-align:center; border-radius:10px;" class="shadow mb-3">
+                            <a href="{{ path('app_client_ajout') }}" style="text-decoration:none; font-size:16px; font-weight: 600; color:#fff;">
+                                <i class="fa-solid fa-file-circle-plus fa-lg" style="margin-right:15px;"></i>
+                                Ajouter un client
+                            </a>
+                        </div>
+                    {% endif %}
 
+                    {% for label, messages in app.flashes() %}
+                        {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                            <i class="fa-solid fa-bell" style="font-size: 20px;"></i>
+                            <span class="text-primary margin-left" style="margin: 0px;margin-left: 10px;">
+                                {{ message }}
+                            </span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                    
                     <div class="row justify-content-end mb-2">
                         <div class="col">
                             <div class="input-group">
@@ -51,9 +54,11 @@
                                 <tr>
                                     <td align="center">
                                         <a href="{{ path('app_client_edit', {'id':client.id}) }}"><em class="fa fa-pencil" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
-                                        <a href="{{ path('app_client_supprimer', {'id': client.id}) }}" onclick="return confirmDelete();">
-                                            <em class="fa fa-trash" style="color:red;"></em>
-                                        </a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('app_client_supprimer', {'id': client.id}) }}" onclick="return confirmDelete();">
+                                                <em class="fa fa-trash" style="color:red;"></em>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                     <td>{{ client.NomClient }}</td>
                                     <td align="center">

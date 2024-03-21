@@ -61,6 +61,10 @@ class ClientController extends AbstractController
     #[Route('/client/modifier/{id}', name:'app_client_edit')]
     public function editClient(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Vous n\'avez pas la permission de modifier cette client.');            
+            return $this->redirectToRoute('app_client_alls');
+        }
         $repository = $doctrine->getRepository(Clients::class);
         $clients = $repository->find($id);
         if (!$clients) {

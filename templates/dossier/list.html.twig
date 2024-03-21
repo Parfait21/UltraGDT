@@ -6,14 +6,14 @@
     <div class="col-md-10 offset-md-1">
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
-                <div class="alert alert-info" role="alert">
-                    <i class="fa fa-warning" style="font-size: 20px;"></i>
-                    <span class="text-info margin-left" style="margin: 0px;margin-left: 10px;">
+                <div class="alert alert-primary" role="alert">
+                    <i class="fa-solid fa-bell" style="font-size: 20px;"></i>
+                    <span class="text-primary margin-left" style="margin: 0px;margin-left: 10px;">
                         {{ message }}
                     </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
                 </div>
-            {% endfor %}  
+            {% endfor %}
         {% endfor %}
         <h1>Liste des dossiers techniques</h1>
         <section></section>
