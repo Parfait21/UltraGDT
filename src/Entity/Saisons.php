@@ -20,7 +20,7 @@ class Saisons
     #[Assert\NotBlank(message: "Veuillez selectionner un client.")]
     private ?Clients $clientId = null;
 
-    #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId')]
+    #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId', cascade: ['remove'])]
     private Collection $dossierTeches;
 
     #[ORM\Column(length: 100, nullable: true)]

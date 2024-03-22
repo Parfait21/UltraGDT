@@ -20,7 +20,7 @@ class Clients
     #[Assert\NotBlank(message: "Veuillez saisir le nom du client.")]
     private ?string $NomClient = null;
 
-    #[ORM\OneToMany(targetEntity: Saisons::class, mappedBy: 'clientId')]
+    #[ORM\OneToMany(targetEntity: Saisons::class, mappedBy: 'clientId', cascade: ['remove'])] // Ajout de cascade={"remove"}
     private Collection $saisons;
 
     public function __construct()
