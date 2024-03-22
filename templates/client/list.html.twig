@@ -53,10 +53,10 @@
                                 {% for client in client %}
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ path('app_client_edit', {'id':client.id}) }}"><em class="fa fa-pencil" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
+                                        <a href="{{ path('app_client_edit', {'id':client.id}) }}"><em class="fa fa-pencil fa-lg" style="margin-right:10px; color:green; cursor:pointer;"></em></a>
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a href="{{ path('app_client_supprimer', {'id': client.id}) }}" onclick="return confirmDelete();">
-                                                <em class="fa fa-trash" style="color:red;"></em>
+                                                <em class="fa fa-trash fa-lg" style="color:red;"></em>
                                             </a>
                                         {% endif %}
                                     </td>
@@ -74,9 +74,9 @@
                             <div aria-label="Page navigation example">
                                 <ul class="pagination">
                                     {% if page != 1 %}
-                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_alls', {page: page - 1, nbre: nbre}) }}">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_alls', {page: page - 1, nbre: nbre}) }}">Précédent</a></li>
                                     {% else %}
-                                        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                                        <li class="page-item disabled"><span class="page-link">Précédent</span></li>
                                     {% endif %}
 
                                     {% set pagesToShow = 2 %} {# Définissez le nombre de pages à afficher #}
@@ -90,9 +90,9 @@
                                     {% endfor %}
 
                                     {% if page != totalPages %}
-                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_alls', {page: page + 1, nbre: nbre}) }}">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_alls', {page: page + 1, nbre: nbre}) }}">Suivant</a></li>
                                     {% else %}
-                                        <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                        <li class="page-item disabled"><span class="page-link">Suivant</span></li>
                                     {% endif %}
                                 </ul>
                             </div>
