@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClientsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
@@ -16,6 +17,7 @@ class Clients
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "Veuillez saisir le nom du client.")]
     private ?string $NomClient = null;
 
     #[ORM\OneToMany(targetEntity: Saisons::class, mappedBy: 'clientId')]

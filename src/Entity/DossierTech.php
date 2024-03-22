@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DossierTechRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DossierTechRepository::class)]
@@ -15,15 +16,18 @@ class DossierTech
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: "Veuillez saisir le nom du fichier.")]
     private ?string $NomDossier = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Veuillez saisir la reference.")]
     private ?string $Reference = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCreat = null;
 
     #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
+    #[Assert\NotBlank(message: "Veuillez selectionner la saison.")]
     private ?Saisons $saisonId = null;
 
     #[ORM\Column(length: 255, nullable: true)]

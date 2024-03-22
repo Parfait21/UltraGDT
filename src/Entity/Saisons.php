@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SaisonsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SaisonsRepository::class)]
@@ -16,12 +17,14 @@ class Saisons
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'dossierTeches')]
+    #[Assert\NotBlank(message: "Veuillez selectionner un client.")]
     private ?Clients $clientId = null;
 
     #[ORM\OneToMany(targetEntity: DossierTech::class, mappedBy: 'saisonId')]
     private Collection $dossierTeches;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank(message: "Veuillez saisir la saison.")]
     private ?string $NomSaison = null;
 
     public function __construct()

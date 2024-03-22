@@ -48,7 +48,7 @@ class ClientController extends AbstractController
             $entityManager->persist($clients);
             $entityManager->flush();
 
-            $this->addFlash('success', "Client a ete ajouter avec succes !");
+            $this->addFlash('success', "client a été ajouté avec succes !");
             return $this->redirectToRoute('app_client_alls');
         }
        
@@ -78,7 +78,7 @@ class ClientController extends AbstractController
             $entityManager->persist($clients);
             $entityManager->flush();
 
-            $this->addFlash('success', "Client a ete modifier avec succes!");
+            $this->addFlash('success', "Client a été modifié avec succes!");
             return $this->redirectToRoute('app_client_alls');
         }
         
@@ -101,7 +101,7 @@ class ClientController extends AbstractController
         $entityManager->remove($clients);
         $entityManager->flush();
 
-        $this->addFlash('success', "Client a ete supprimer avec succes!");
+        $this->addFlash('success', "Client a été supprimé avec succes!");
         return $this->redirectToRoute('app_client_alls');
     }
 
