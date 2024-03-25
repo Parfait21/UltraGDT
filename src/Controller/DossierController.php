@@ -18,17 +18,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DossierController extends AbstractController
 {
-    // Une methode pour afficher dossier technique
-    #[Route('/dossier', name: 'app_dossier_list')]
-    public function listDossier(ManagerRegistry $doctrine): Response
-    {
-        $repository = $doctrine->getRepository(DossierTech::class);
-        $dossiers = $repository->findAll();
-        return $this->render('dossier/list.html.twig', [
-            'dossiers' => $dossiers,
-        ]);
-    }
-
+    
     // Methode d'ajout d'un dossier technique
     #[Route('/dossier/ajout', name: 'app_dossier_ajout')]
     public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
@@ -109,15 +99,6 @@ class DossierController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', "Fichier a ete supprimer avec succes!");
         return $this->redirectToRoute('app_dossier_list');
-    }
-
-    // Details d'une telle Dossier Technique
-    #[Route('/dossier/liste', name:'app_list1')]
-    public function liste1(): Response
-    {
-        return $this->render('dossier/liste1.html.twig',[
-            
-        ]);
     }
 
     #[Route("/images/pull/{client}/{saison}", name: "app_images_pull")]

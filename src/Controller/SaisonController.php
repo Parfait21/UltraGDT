@@ -46,7 +46,7 @@ class SaisonController extends AbstractController
 
         return $this->render('saison/ajout.html.twig', [
             'form' => $form->createView(),
-            'client' => $client, // Passer le client à la vue Twig
+            'client' => $client,
         ]);
     }
 

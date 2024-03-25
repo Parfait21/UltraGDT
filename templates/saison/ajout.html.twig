@@ -32,8 +32,8 @@
                         <div class="row align-items-center" style="margin-right:0px;margin-left:0px;padding-top:24px;">
                             <div class="col-md-10 offset-md-1">
                                 <button style="padding:7px 20px 7px; border:none; background:#5DB03E; color:#fff; font-size:16px;" type="submit">Ajouter</button>
-                                <button style="padding:7px 20px 7px; border:none; background:#C70039;" type="submit">
-                                    <a href="{{ path('app_client_alls') }}" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
+                                <button id="retourButton" style="padding:7px 20px 7px; border:none; background:#C70039;" type="button">
+                                    <a href="#" style="text-decoration:none; color:#fff; font-size:16px;">Retour</a>
                                 </button>
                             </div>
                         </div>
@@ -43,4 +43,9 @@
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById("retourButton").onclick = function() {
+            window.history.back(); // Cette ligne permet de retourner à la page précédente dans l'historique du navigateur.
+        };
+    </script>
 {% endblock %}
