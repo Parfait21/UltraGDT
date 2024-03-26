@@ -18,9 +18,6 @@ class DossierFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('NomDossier', TextType::class, [
-                'required' => false,
-            ])
             ->add('Reference', TextType::class, [
                'required' => false,
             ])

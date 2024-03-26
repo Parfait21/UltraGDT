@@ -15,10 +15,6 @@ class DossierTech
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "Veuillez saisir le nom du fichier.")]
-    private ?string $NomDossier = null;
-
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Veuillez saisir la reference.")]
     private ?string $Reference = null;
@@ -45,18 +41,6 @@ class DossierTech
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNomDossier(): ?string
-    {
-        return $this->NomDossier;
-    }
-
-    public function setNomDossier(string $NomDossier): static
-    {
-        $this->NomDossier = $NomDossier;
-
-        return $this;
     }
 
     public function getReference(): ?string
