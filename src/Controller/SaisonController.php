@@ -50,7 +50,6 @@ class SaisonController extends AbstractController
         ]);
     }
 
-
     // Modifier une telle saison
     #[Route('/saison/modifier/{id}', name:'app_saison_edit')]
     public function editSaison(ManagerRegistry $doctrine, Request $request, int $id): Response
