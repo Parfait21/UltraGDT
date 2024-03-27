@@ -34,6 +34,7 @@ class DossierFormType extends AbstractType
                 'required' => false,
                 'class' => Saisons::class,
                 'choice_label' => 'NomSaison',
+                'attr' => ['class' => 'select2'],
             ]) 
                
             ->add('brochure', FileType::class, [

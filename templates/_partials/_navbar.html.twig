@@ -1,42 +1,40 @@
-<nav>
-    <div class="nav-bar">
-        <i class='bx bx-menu sidebarOpen'></i>
-        <span class="logo navLogo" style="margin-left:-100px;">
-    <a class="navbar-brand" href="https://www.ultramaille.com/" target="_blank" style="color:#18306D;">
-        Ultramaille S.A
-    </a>
-</span>
-        <div class="menu">
-            <ul class="nav-links">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_client_alls') }}">Clients</a></li>
-                {% endif %}                    
-            </ul>
-        </div>
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
-        <div class="darkLight-searchBox">
-            <div class="searchBox">
-                <div class="dropdown">
-                    <p class="dropbtn btn shadow" style="border-radius: 5px; background:#18306D; color:#fff; padding: 5px 10px; border: none; margin-top: 15px;">
-                        <i class="fa-solid fa-user-tie fa-lg" style="font-size: 20px;"></i>
-                    </p>
-                    <div class="dropdown-content">
+<body>
+    <div class="container-fluid" style="padding: 0px;">
+        <nav class="navbar navbar-expand-md sticky-top navigation-clean white-links navbar-light" style="background: rgba(42, 87, 107, 1); color: white;">
+            <div class="container"><a class="navbar-brand" id="company-name" href="https://www.ultramaille.com/">Ultramaille SA</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" onclick="SetNavBackground();"><span class="visually-hidden">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="color: white;font-size: 30px;">
+                        <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"></path>
+                        <path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="currentColor"></path>
+                        <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="currentColor"></path>
+                    </svg></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_client_alls') }}">Clients</a></li>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a href="{{ path('app_logout') }}" class="dropdown-item">
-                                <em class="fa fa-sign-out"></em>
-                                Déconnexion
-                            </a>
+                            <li class="nav-item">
+                                <a style="background-color:#FF5733; padding:8px 18px 8px; border:none; border-radius:50px;" class="btn btn-info move-left-xs-sm-md me-md-3 mb-3 mb-md-0" role="button" href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
+                            </li>
                         {% else %}
-                            <a href="{{ path('app_login') }}" class="dropdown-item"><em class="fa fa-sign-in"></em> Connexion</a>
-                            <a href="{{ path('app_register') }}" class="dropdown-item">
-                                <em class="fa fa-user-plus"></em>
-                                Inscription
-                            </a>
-                        {% endif %}   
-                    </div>
+                            <li class="nav-item"><a class="btn btn-info move-left-xs-sm-md me-md-3 mb-3 mb-md-0" role="button" href="{{ path('app_login') }}">Connexion</a></li>
+                            <li class="nav-item"><a class="btn btn-success move-left-xs-sm-md" role="button" href="{{ path('app_register') }}">Inscription</a></li>
+                        {% endif %}
+                        </ul>
                 </div>
             </div>
-        </div>
+        </nav>
     </div>
-</nav>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+</body>
