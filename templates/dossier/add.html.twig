@@ -10,6 +10,17 @@
                 {{ form_start(form) }}
                     <div id="formdiv">
                         <div class="row" style="margin-right:0px;margin-left:0px;padding-top:24px; margin-top:20px;">
+                        {% for label, messages in app.flashes() %}
+                            {% for message in messages %}
+                                <div class="alert alert-primary" role="alert">
+                                    <i class="fa-solid fa-bell" style="font-size: 20px;"></i>
+                                    <span class="text-primary margin-left" style="margin: 0px;margin-left: 10px;">
+                                        {{ message }}
+                                    </span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: relative; float: right;"></button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                         <h1 class="display-6" style="text-align:center;">Ajouter dossier technique</h1>
                             <div class="col-md-8 offset-md-1">
                                 <p style="font-family:Roboto, sans-serif;font-size:24px;"><strong>{{ form_label(form.Reference) }}</strong></p>

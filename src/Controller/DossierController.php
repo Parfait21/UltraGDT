@@ -51,8 +51,7 @@ class DossierController extends AbstractController
 
             $this->addFlash('success', 'Le fichier a été ajouté avec succès.');
 
-            // return $this->redirectToRoute('app_saison_images', ['id' => $dossier->getSaisonId()->getId()]);
-            return $this->redirectToRoute('app_client_saison', ['id' => $dossier->getSaisonId()->getClientId()->getId()]);
+            return $this->redirectToRoute('app_dossier_ajout');
         }
         
         return $this->render('dossier/add.html.twig',[
