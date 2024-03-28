@@ -77,32 +77,32 @@
                             <p>Aucune saison trouvée pour ce client.</p>
                         {% endif %}
                         {% if isPaginated %}
-    <div aria-label="Page navigation example">
-        <ul class="pagination">
-            {% if page != 1 %}
-                <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page - 1, 'nbre': nbre}) }}">Précédent</a></li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link">Précédent</span></li>
-            {% endif %}
+                            <div aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if page != 1 %}
+                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page - 1, 'nbre': nbre}) }}">Précédent</a></li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+                                    {% endif %}
 
-            {% set pagesToShow = 2 %}
-            {% set startPage = max(1, page - 1) %}
-            {% set endPage = min(totalPages, startPage + pagesToShow - 1) %}
+                                    {% set pagesToShow = 2 %}
+                                    {% set startPage = max(1, page - 1) %}
+                                    {% set endPage = min(totalPages, startPage + pagesToShow - 1) %}
 
-            {% for i in range(startPage, endPage + 1) %}
-                <li class="page-item {% if i == page %}active{% endif %}">
-                    <a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': i, 'nbre': nbre}) }}">{{ i }}</a>
-                </li>
-            {% endfor %}
+                                    {% for i in range(startPage, endPage + 1) %}
+                                        <li class="page-item {% if i == page %}active{% endif %}">
+                                            <a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': i, 'nbre': nbre}) }}">{{ i }}</a>
+                                        </li>
+                                    {% endfor %}
 
-            {% if page != totalPages %}
-                <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page + 1, 'nbre': nbre}) }}">Suivant</a></li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link">Suivant</span></li>
-            {% endif %}
-        </ul>
-    </div>
-{% endif %}
+                                    {% if page != totalPages %}
+                                        <li class="page-item"><a class="page-link" href="{{ path('app_client_saison', {'id': client.id, 'page': page + 1, 'nbre': nbre}) }}">Suivant</a></li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
 
                         </div>
                     </div>
