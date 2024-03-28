@@ -4,6 +4,18 @@
 
 
 {% block body %}
+    <!-- Start Section ajout -->
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="ajout">
+          <button type="button" class="btn btn-warning shadow" style="color:#fff; padding:10px 15px 10px;">
+            <a href="{{ path('app_dossier_ajout') }}" style="text-decoration:none; font-size:18px; font-weight: 600; color:#fff;">
+                <i class="fa-solid fa-file-circle-plus fa-lg"></i> Ajouter une images
+            </a>
+          </button>
+        </div>
+    {% endif %}
+    <!-- End Section ajout -->
+
 		<!-- Start We Help Section -->
 		<div class="we-help-section">
 			<div class="container">
