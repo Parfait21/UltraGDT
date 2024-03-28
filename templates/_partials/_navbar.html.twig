@@ -19,10 +19,10 @@
                     </svg></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_client_alls') }}">Clients</a></li>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_client_alls') }}">Clients</a></li>
                             <li class="nav-item">
                                 <a style="background-color:#FF5733; padding:8px 18px 8px; border:none; border-radius:50px;" class="btn btn-info move-left-xs-sm-md me-md-3 mb-3 mb-md-0" role="button" href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
                             </li>
